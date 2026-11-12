@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma Inteligente de Apoyo al Estudio | Perfil Inicial</title>
+  <meta name="description" content="Primera etapa de la plataforma de estudio inteligente: registro, entrevista de diagnóstico y generación de perfil de estudio adaptativo.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            heading: ['"Fraunces"', 'serif']
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              900: '#1e3a8a'
+            },
+            calm: {
+              teal: '#0d9488',
+              warm: '#fef3c7',
+              accent: '#f59e0b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Top Navigation Header -->
+  <header class="w-full bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 font-heading font-bold text-lg">
+          EA
+        </div>
+        <div>
+          <span class="font-heading font-bold text-lg text-slate-900 tracking-tight">EstudioAdaptativo</span>
+          <span class="hidden sm:inline-block text-xs bg-brand-100 text-brand-700 font-semibold px-2 py-0.5 rounded-full ml-2">Tu espacio de estudio</span>
+        </div>
+      </div>
+
+      <!-- Quick status / actions -->
+      <div class="flex items-center space-x-2">
+        <button id="btn-resume-data" class="hidden text-xs font-medium text-brand-600 hover:text-brand-800 bg-brand-50 hover:bg-brand-100 px-3 py-1.5 rounded-lg transition-colors border border-brand-200">
+          Reanudar borrador
+        </button>
+        <span class="text-xs text-slate-500 hidden sm:inline" id="header-context">Registro y perfil inicial</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 flex flex-col justify-center">
+
+    <!-- Progress Indicator (Hidden on Welcome and Final Profile screen) -->
+    <div id="interview-progress-wrapper" class="hidden mb-6 sm:mb-8 transition-all duration-300">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold tracking-wider uppercase text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-1 rounded-full" id="progress-step-badge">
+            Paso 1 de 5
+          </span>
+          <span class="text-xs font-medium text-slate-500" id="progress-step-name">Datos académicos</span>
+        </div>
+        <span class="text-xs font-bold text-slate-600" id="progress-percentage">20%</span>
+      </div>
+      <!-- Track bar -->
+      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar-fill" class="bg-gradient-to-r from-brand-500 to-teal-500 h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 20%;"></div>
+      </div>
+    </div>
+
+    <!-- VIEW 0: WELCOME SCREEN -->
+    <section id="view-welcome" class="app-card bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold mb-6 border border-teal-200/50">
+        <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+        Espacio seguro, adaptable y a tu propio ritmo
+      </div>
+
+      <h1 class="font-heading font-extrabold text-2xl sm:text-4xl text-slate-900 tracking-tight leading-tight mb-4">
+        Antes de estudiar más duro, aprendamos a <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-600">estudiar mejor</span>.
+      </h1>
+
+      <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
+        Esta plataforma está diseñada para acompañarte en tu formación secundaria, terciaria o universitaria. No te impondremos fórmulas rígidas ni recetas mágicas: primero queremos conocer tus tiempos, tu materia y cómo aprendes mejor.
+      </p>
+
+      <!-- Transparency & reassurance blocks -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+          <div class="p-2 rounded-xl bg-brand-100 text-brand-700 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm mb-1">Tus propios apuntes</h3>
+            <p class="text-xs text-slate-500 leading-normal">Empiezas estudiando con tus notas, resúmenes y bibliografía habitual. El centro siempre es tu material.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+          <div class="p-2 rounded-xl bg-teal-100 text-teal-700 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm mb-1">Tú decides sobre la IA</h3>
+            <p class="text-xs text-slate-500 leading-normal">La asistencia adicional de IA es 100% opcional y tú eliges si habilitarla ahora o más adelante.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+          <div class="p-2 rounded-xl bg-amber-100 text-amber-800 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm mb-1">Sin etiquetas fijas</h3>
+            <p class="text-xs text-slate-500 leading-normal">No creemos en encerrarte en una categoría rígida. El método se adapta según tu avance real.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+          <div class="p-2 rounded-xl bg-purple-100 text-purple-700 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm mb-1">Entrevista breve (~3 min)</h3>
+            <p class="text-xs text-slate-500 leading-normal">5 pasos simples y claros. Puedes saltar lo que no quieras contestar y editarlo cuando quieras.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <button type="button" id="btn-start-interview" class="w-full sm:w-auto flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg shadow-brand-600/30 transition-all duration-200 flex items-center justify-center gap-2 text-base">
+          <span>Comenzar entrevista inicial</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- FORM WRAPPER FOR STEPS 1-5 -->
+    <form id="interview-form" class="hidden" onsubmit="event.preventDefault();">
+
+      <!-- STEP 1: Academic Data -->
+      <div id="step-1" class="step-pane bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">Paso 1 de 5</div>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">¿Qué estás estudiando y cuál es tu meta?</h2>
+          <p class="text-slate-500 text-sm mt-1">Queremos saber en qué etapa estás para ajustar el lenguaje y las recomendaciones.</p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Nombre o apodo -->
+          <div>
+            <label for="student-name" class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Cómo te gustaría que te llamemos? <span class="text-brand-600">*</span>
+            </label>
+            <input type="text" id="student-name" name="name" required placeholder="Tu nombre o apodo (ej. Sofía, Nico)"
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-slate-900 font-medium placeholder-slate-400 transition">
+            <p id="name-error" class="text-xs text-rose-600 mt-1 hidden">Por favor ingresa un nombre o apodo para continuar.</p>
+          </div>
+
+          <!-- Nivel Educativo -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              Nivel educativo actual <span class="text-brand-600">*</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="edu-level-group">
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="edu_level" value="Secundario" class="sr-only" required>
+                <div class="choice-icon w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">🎒</div>
+                <div class="text-left">
+                  <div class="text-sm font-bold text-slate-800 choice-title">Secundario / Bachillerato</div>
+                  <div class="text-xs text-slate-500">Colegio secundario o preparatoria</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="edu_level" value="Terciario" class="sr-only">
+                <div class="choice-icon w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">🏫</div>
+                <div class="text-left">
+                  <div class="text-sm font-bold text-slate-800 choice-title">Terciario / Técnico superior</div>
+                  <div class="text-xs text-slate-500">Tecnicaturas, institutos de formación</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="edu_level" value="Universitario" class="sr-only">
+                <div class="choice-icon w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">🎓</div>
+                <div class="text-left">
+                  <div class="text-sm font-bold text-slate-800 choice-title">Universitario</div>
+                  <div class="text-xs text-slate-500">Grado o posgrado universitario</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="edu_level" value="Preparación de ingreso" class="sr-only">
+                <div class="choice-icon w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">📝</div>
+                <div class="text-left">
+                  <div class="text-sm font-bold text-slate-800 choice-title">Preparación de ingreso</div>
+                  <div class="text-xs text-slate-500">Exámenes de admisión, CBC o cursos de ingreso</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3 sm:col-span-2">
+                <input type="radio" name="edu_level" value="Examen o certificación" class="sr-only">
+                <div class="choice-icon w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-lg">📜</div>
+                <div class="text-left">
+                  <div class="text-sm font-bold text-slate-800 choice-title">Examen libre o certificación profesional</div>
+                  <div class="text-xs text-slate-500">Idiomas, certificaciones técnicas, oposiciones</div>
+                </div>
+              </label>
+            </div>
+            <p id="edu-error" class="text-xs text-rose-600 mt-1 hidden">Por favor selecciona tu nivel educativo actual.</p>
+          </div>
+
+          <!-- Materia o área de estudio -->
+          <div>
+            <label for="study-subject" class="block text-sm font-bold text-slate-800 mb-2">
+              Materia o área de estudio prioritaria <span class="text-brand-600">*</span>
+            </label>
+            <input type="text" id="study-subject" name="subject" required placeholder="Ej. Biología Celular, Álgebra Lineal, Historia Moderna, Derecho Civil..."
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-slate-900 font-medium placeholder-slate-400 transition">
+            <p id="subject-error" class="text-xs text-rose-600 mt-1 hidden">Por favor ingresa la materia principal.</p>
+          </div>
+
+          <!-- Nombre del curso o carrera (opcional) -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="career-name" class="block text-sm font-bold text-slate-800">
+                Carrera, especialidad o curso
+              </label>
+              <span class="text-xs text-slate-400 font-medium">Opcional</span>
+            </div>
+            <input type="text" id="career-name" name="career" placeholder="Ej. Medicina, Ingeniería en Sistemas, Tecnicatura en RRHH, 5to Año..."
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-slate-900 font-medium placeholder-slate-400 transition">
+          </div>
+
+          <!-- Fecha de próximo examen / entrega -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="target-date" class="block text-sm font-bold text-slate-800">
+                Fecha de tu próximo examen, entrega o meta
+              </label>
+              <span class="text-xs text-slate-400 font-medium">Opcional</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
+              <input type="date" id="target-date" name="target_date"
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-slate-900 font-medium transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons navigation -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <button type="button" class="px-5 py-3 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm font-semibold transition" onclick="showWelcome()">
+            ← Volver al inicio
+          </button>
+          <button type="button" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3 rounded-xl shadow-md shadow-brand-600/20 text-sm transition flex items-center gap-2" onclick="validateAndNext(1)">
+            <span>Siguiente: Tiempos</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Time and Organization -->
+      <div id="step-2" class="step-pane hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">Paso 2 de 5</div>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">¿Cómo organizas tu tiempo real?</h2>
+          <p class="text-slate-500 text-sm mt-1">Es mejor planificar 45 minutos reales que proponerte 6 horas que no vas a poder cumplir.</p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Tiempo disponible por día -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              Cantidad aproximada de tiempo disponible por día de estudio <span class="text-brand-600">*</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="daily_time" value="30-45m" class="sr-only">
+                <div class="text-base font-bold text-slate-800 choice-title">30 - 45 min</div>
+                <div class="text-xs text-slate-500">Sesión compacta</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="daily_time" value="1-2h" class="sr-only" checked>
+                <div class="text-base font-bold text-slate-800 choice-title">1 a 2 horas</div>
+                <div class="text-xs text-slate-500">Ritmo equilibrado</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="daily_time" value="2-4h" class="sr-only">
+                <div class="text-base font-bold text-slate-800 choice-title">2 a 4 horas</div>
+                <div class="text-xs text-slate-500">Dedicación fuerte</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="daily_time" value="4h+" class="sr-only">
+                <div class="text-base font-bold text-slate-800 choice-title">Más de 4 horas</div>
+                <div class="text-xs text-slate-500">Intensivo / Exámenes</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Días disponibles -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              ¿Qué días sueles tener disponibilidad para estudiar?
+            </label>
+            <p class="text-xs text-slate-500 mb-3">Marca los días aproximados (puedes elegir varios):</p>
+            <div class="flex flex-wrap gap-2" id="available-days-container">
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Lun" class="sr-only" checked>
+                <span>Lunes</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Mar" class="sr-only" checked>
+                <span>Martes</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Mié" class="sr-only" checked>
+                <span>Miércoles</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Jue" class="sr-only" checked>
+                <span>Jueves</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Vie" class="sr-only" checked>
+                <span>Viernes</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Sáb" class="sr-only">
+                <span>Sábado</span>
+              </label>
+              <label class="day-chip cursor-pointer px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-400 text-xs font-bold text-slate-700 transition">
+                <input type="checkbox" name="study_days" value="Dom" class="sr-only">
+                <span>Domingo</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Horario de mejor concentración -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿En qué horario sueles concentrarte mejor?
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="peak_hour" value="Mañana" class="sr-only" checked>
+                <div class="text-xl mb-1">🌅</div>
+                <div class="text-sm font-bold text-slate-800 choice-title">Mañana</div>
+                <div class="text-[11px] text-slate-500">Mente fresca</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="peak_hour" value="Tarde" class="sr-only">
+                <div class="text-xl mb-1">☀️</div>
+                <div class="text-sm font-bold text-slate-800 choice-title">Tarde</div>
+                <div class="text-[11px] text-slate-500">Horario de clase</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="peak_hour" value="Noche" class="sr-only">
+                <div class="text-xl mb-1">🌙</div>
+                <div class="text-sm font-bold text-slate-800 choice-title">Noche</div>
+                <div class="text-[11px] text-slate-500">Silencio y calma</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition text-center">
+                <input type="radio" name="peak_hour" value="Variable" class="sr-only">
+                <div class="text-xl mb-1">🔄</div>
+                <div class="text-sm font-bold text-slate-800 choice-title">Variable</div>
+                <div class="text-[11px] text-slate-500">Depende del día</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Preferencia de formato de sesión -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Qué ritmo de sesión prefieres como punto de partida?
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="session_format" value="Sesiones cortas con pausas" class="sr-only" checked>
+                <div class="font-bold text-sm text-slate-800 choice-title mb-1">Sesiones cortas (Pomodoro)</div>
+                <div class="text-xs text-slate-500">Bloques de 20 a 25 min con descansos breves de 5 min. Ideal para evitar la fatiga mental.</div>
+              </label>
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="session_format" value="Sesiones medias" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title mb-1">Sesiones medias</div>
+                <div class="text-xs text-slate-500">Bloques de 45 a 50 min seguidos de 10-15 min de descanso. Buen equilibrio de concentración.</div>
+              </label>
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="session_format" value="Bloques largos" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title mb-1">Bloques largos</div>
+                <div class="text-xs text-slate-500">Inmersión continua de 75 a 90+ min. Para quienes les cuesta entrar en foco pero rinden bien sostenidos.</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Principal dificultad de organización -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Cuál sientes que es tu principal dificultad al estudiar? <span class="text-brand-600">*</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="difficulty-group">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Empezar (procrastinación)" class="sr-only" required>
+                <span class="text-lg">🚪</span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Empezar a estudiar</div>
+                  <div class="text-xs text-slate-500">Procrastinación, me cuesta dar el primer paso</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Mantener la concentración" class="sr-only">
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Mantener la concentración</div>
+                  <div class="text-xs text-slate-500">Me distraigo con el teléfono o pensamientos</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Organizar tiempos" class="sr-only">
+                <span class="text-lg">📅</span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Organizar los tiempos</div>
+                  <div class="text-xs text-slate-500">Se me acumulan los temas antes del examen</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Comprender conceptos" class="sr-only">
+                <span class="text-lg">🧩</span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Comprender los temas</div>
+                  <div class="text-xs text-slate-500">Leo varias veces pero siento que no entiendo</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Recordar a largo plazo" class="sr-only">
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Recordar lo estudiado</div>
+                  <div class="text-xs text-slate-500">Siento que me olvido rápido de las cosas</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="main_difficulty" value="Practicar y aplicar" class="sr-only">
+                <span class="text-lg">✍️</span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Practicar y resolver</div>
+                  <div class="text-xs text-slate-500">Entiendo la teoría pero dudo en la práctica</div>
+                </div>
+              </label>
+            </div>
+            <p id="diff-error" class="text-xs text-rose-600 mt-1 hidden">Por favor indica tu dificultad principal.</p>
+          </div>
+        </div>
+
+        <!-- Buttons navigation -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <button type="button" class="px-5 py-3 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm font-semibold transition" onclick="goToStep(1)">
+            ← Volver al Paso 1
+          </button>
+          <button type="button" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3 rounded-xl shadow-md shadow-brand-600/20 text-sm transition flex items-center gap-2" onclick="validateAndNext(2)">
+            <span>Siguiente: Preferencias</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Study Preferences -->
+      <div id="step-3" class="step-pane hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">Paso 3 de 5</div>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">¿Cómo te resulta más cómodo aprender?</h2>
+          <p class="text-slate-500 text-sm mt-1">
+            Estas opciones son solo un punto de partida inicial. No te encasillan: comprobaremos con el uso real qué método te rinde más.
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Modos favoritos de estudiar -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              ¿Qué formatos o recursos te resultan más atractivos? (Elige los que quieras)
+            </label>
+            <p class="text-xs text-slate-500 mb-3">Puedes marcar varios para combinarlos:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="study-modalities">
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Leer textos y apuntes" class="sr-only" checked>
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Leer textos y apuntes</div>
+                  <div class="text-[11px] text-slate-500">Lectura reflexiva y subrayado</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Escuchar explicaciones" class="sr-only">
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Escuchar explicaciones o audios</div>
+                  <div class="text-[11px] text-slate-500">Podcasts, notas de voz o clases grabadas</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Ejemplos gráficos y diagramas" class="sr-only" checked>
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Ejemplos gráficos y esquemas</div>
+                  <div class="text-[11px] text-slate-500">Mapas conceptuales e infografías</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Mirar videos y animaciones" class="sr-only">
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Mirar videos o animaciones</div>
+                  <div class="text-[11px] text-slate-500">Explicaciones paso a paso en video</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Resolver ejercicios prácticos" class="sr-only">
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Resolver ejercicios prácticos</div>
+                  <div class="text-[11px] text-slate-500">Aprender resolviendo casos reales</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3">
+                <input type="checkbox" name="modalities" value="Fichas de preguntas (flashcards)" class="sr-only">
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Fichas de preguntas y respuestas</div>
+                  <div class="text-[11px] text-slate-500">Flashcards y autoevaluación activa</div>
+                </div>
+              </label>
+
+              <label class="multi-choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 transition flex items-center gap-3 sm:col-span-2">
+                <input type="checkbox" name="modalities" value="Explicar en voz alta" class="sr-only">
+                <span class="choice-marker"></span>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Explicar en voz alta (Técnica Feynman)</div>
+                  <div class="text-[11px] text-slate-500">Verbalizar lo aprendido con tus propias palabras para detectar lagunas</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Individual vs Grupal -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Cómo prefieres estudiar?
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="social_pref" value="Individual" class="sr-only" checked>
+                <div class="font-bold text-sm text-slate-800 choice-title">Individualmente</div>
+                <div class="text-xs text-slate-500 mt-1">Me concentro más y voy a mi propio ritmo</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="social_pref" value="Grupal" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title">En grupo</div>
+                <div class="text-xs text-slate-500 mt-1">Me motiva compartir dudas y discutir temas</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="social_pref" value="Mixto" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title">Mixto / Combinado</div>
+                <div class="text-xs text-slate-500 mt-1">Individual para comprender, grupo para repasar</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nivel de detalle de explicaciones -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Cómo prefieres recibir explicaciones y resúmenes?
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="explanation_depth" value="Simple y directa" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title">Simple y directa</div>
+                <div class="text-xs text-slate-500 mt-1">Directo al grano, ideas clave y analogías sencillas</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="explanation_depth" value="Intermedia con ejemplos" class="sr-only" checked>
+                <div class="font-bold text-sm text-slate-800 choice-title">Intermedia</div>
+                <div class="text-xs text-slate-500 mt-1">Balance con ejemplos prácticos y aplicaciones</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="explanation_depth" value="Detallada y rigurosa" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title">Detallada y rigurosa</div>
+                <div class="text-xs text-slate-500 mt-1">Profundidad conceptual, fundamentos y contexto</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Modo de interacción -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              Preferencia de interacción con el sistema
+            </label>
+            <div class="grid grid-cols-3 gap-3">
+              <label class="choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 text-center">
+                <input type="radio" name="interaction_mode" value="Texto" class="sr-only" checked>
+                <div class="text-lg mb-0.5">💬</div>
+                <div class="text-xs font-bold text-slate-800 choice-title">Texto</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 text-center">
+                <input type="radio" name="interaction_mode" value="Audio" class="sr-only">
+                <div class="text-lg mb-0.5">🎙️</div>
+                <div class="text-xs font-bold text-slate-800 choice-title">Audio</div>
+              </label>
+              <label class="choice-card cursor-pointer p-3 rounded-xl border border-slate-200 hover:border-brand-400 text-center">
+                <input type="radio" name="interaction_mode" value="Ambas (Mixto)" class="sr-only">
+                <div class="text-lg mb-0.5">🔄</div>
+                <div class="text-xs font-bold text-slate-800 choice-title">Ambas</div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons navigation -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <button type="button" class="px-5 py-3 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm font-semibold transition" onclick="goToStep(2)">
+            ← Volver al Paso 2
+          </button>
+          <button type="button" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3 rounded-xl shadow-md shadow-brand-600/20 text-sm transition flex items-center gap-2" onclick="validateAndNext(3)">
+            <span>Siguiente: Conocimiento</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Prior Knowledge & Diagnostic -->
+      <div id="step-4" class="step-pane hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">Paso 4 de 5</div>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">¿Por qué tema te gustaría comenzar?</h2>
+          <p class="text-slate-500 text-sm mt-1">Definir un primer tema concreto hace que estudiar deje de ser abrumador.</p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Primer tema o capítulo -->
+          <div>
+            <label for="first-topic" class="block text-sm font-bold text-slate-800 mb-2">
+              Tema, capítulo o unidad específica <span class="text-brand-600">*</span>
+            </label>
+            <input type="text" id="first-topic" name="first_topic" required placeholder="Ej. Leyes de Mendel, Derivadas parciales, Revolución Francesa, Obligaciones en Derecho..."
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-300 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-slate-900 font-medium placeholder-slate-400 transition">
+            <p id="topic-error" class="text-xs text-rose-600 mt-1 hidden">Por favor indica el tema que quieres comenzar a estudiar.</p>
+          </div>
+
+          <!-- Nivel de conocimiento sobre el tema -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-2">
+              ¿Cuánto conoces actualmente sobre este tema? <span class="text-brand-600">*</span>
+            </label>
+            <div class="space-y-2.5" id="knowledge-level-group">
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="knowledge_level" value="No conozco nada" class="sr-only" required>
+                <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-600">0%</div>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">No conozco nada</div>
+                  <div class="text-xs text-slate-500">Es la primera vez que lo veo o no recuerdo nada. Empezamos de cero.</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="knowledge_level" value="Conozco conceptos básicos" class="sr-only">
+                <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center font-bold text-xs text-blue-700">25%</div>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Conozco conceptos básicos</div>
+                  <div class="text-xs text-slate-500">Escuché hablar de él, conozco las palabras clave pero no puedo explicarlo bien.</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="knowledge_level" value="Conozco una parte, pero tengo dudas" class="sr-only">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center font-bold text-xs text-amber-700">50%</div>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Conozco una parte, pero tengo dudas</div>
+                  <div class="text-xs text-slate-500">Tengo una base pero me trabo en ciertos puntos o ejercicios difíciles.</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="knowledge_level" value="Ya lo estudié y necesito repasar o practicar" class="sr-only">
+                <div class="w-8 h-8 rounded-lg bg-teal-100 flex items-center justify-center font-bold text-xs text-teal-700">75%</div>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Ya lo estudié y necesito repasar o practicar</div>
+                  <div class="text-xs text-slate-500">Comprendo el tema; busco consolidar, hacer preguntas tipo examen y no olvidar.</div>
+                </div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-3.5 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition flex items-center gap-3">
+                <input type="radio" name="knowledge_level" value="Lo domino y quiero profundizar" class="sr-only">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center font-bold text-xs text-emerald-700">100%</div>
+                <div>
+                  <div class="text-sm font-bold text-slate-800 choice-title">Lo domino y quiero profundizar</div>
+                  <div class="text-xs text-slate-500">Manejo fluido; quiero casos avanzados, conectar con otros temas o enseñar a otros.</div>
+                </div>
+              </label>
+            </div>
+            <p id="know-error" class="text-xs text-rose-600 mt-1 hidden">Por favor selecciona tu nivel de conocimiento actual.</p>
+          </div>
+
+          <!-- Diagnóstico Breve Opcional (5 preguntas) -->
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-brand-50/60 to-slate-50 border border-brand-100">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-brand-700 bg-brand-100 px-2 py-0.5 rounded-md">Opcional</span>
+                  <h3 class="font-bold text-slate-900 text-sm">Diagnóstico breve de 5 preguntas rápidas</h3>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  ¿Te gustaría hacer un chequeo de 5 preguntas metacognitivas para calibrar con mayor precisión el punto exacto de partida de tu tema?
+                </p>
+              </div>
+            </div>
+
+            <!-- Botón para desplegar / realizar diagnóstico -->
+            <div class="mt-4 flex flex-wrap items-center gap-2.5">
+              <button type="button" id="btn-open-quiz" class="text-xs font-bold text-brand-700 bg-white hover:bg-brand-100 border border-brand-300 px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-1.5" onclick="toggleQuizModal()">
+                <span>📝 Realizar diagnóstico breve ahora</span>
+              </button>
+              <span id="quiz-status-pill" class="text-xs text-slate-500 italic">No realizado (puedes omitirlo o hacerlo cuando quieras)</span>
+            </div>
+
+            <!-- Quiz container interactivo -->
+            <div id="quiz-interactive-container" class="hidden mt-4 pt-4 border-t border-brand-200/60 space-y-4">
+              <div class="text-xs font-bold text-brand-800 uppercase tracking-wider">Mini diagnóstico conceptual sobre tu tema:</div>
+              <div id="quiz-questions-list" class="space-y-3">
+                <!-- Injected via JavaScript based on chosen topic -->
+              </div>
+              <button type="button" class="w-full bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition" onclick="submitDiagnosticQuiz()">
+                Calibrar con mis respuestas del diagnóstico
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons navigation -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <button type="button" class="px-5 py-3 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm font-semibold transition" onclick="goToStep(3)">
+            ← Volver al Paso 3
+          </button>
+          <button type="button" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3 rounded-xl shadow-md shadow-brand-600/20 text-sm transition flex items-center gap-2" onclick="validateAndNext(4)">
+            <span>Siguiente: Privacidad</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Content & Privacy Preferences -->
+      <div id="step-5" class="step-pane hidden bg-white rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="mb-6">
+          <div class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-1">Paso 5 de 5</div>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">Tus apuntes, tu privacidad y tus reglas</h2>
+          <p class="text-slate-500 text-sm mt-1">El control de tus materiales y de la asistencia tecnológica siempre está en tus manos.</p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Opción predeterminada: Apuntes propios -->
+          <div class="p-5 rounded-2xl bg-slate-50 border-2 border-brand-400/40 relative">
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center text-lg shrink-0 shadow-sm">
+                📁
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-white bg-brand-600 px-2 py-0.5 rounded-full">Predeterminado</span>
+                  <h3 class="font-bold text-slate-900 text-base">Estudiar con apuntes y materiales propios</h3>
+                </div>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Todo tu estudio se construirá sobre tus propios apuntes, resúmenes, libros de texto de tu cátedra y notas de clase. Tú eres quien define el contenido verdadero de tu cursada.
+                </p>
+                <div class="mt-2 text-[11px] text-teal-700 font-semibold flex items-center gap-1">
+                  <svg class="w-4 h-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  Activo automáticamente
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fuentes verificadas e IA complementaria -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              ¿Deseas habilitar en el futuro fuentes verificadas e Inteligencia Artificial complementaria?
+            </label>
+            <p class="text-xs text-slate-500 mb-3">La IA solo intervendría para generar preguntas de práctica o aclarar dudas basadas en fuentes académicas:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="allow_ai" value="si" class="sr-only" checked>
+                <div class="font-bold text-sm text-slate-800 choice-title flex items-center gap-2">
+                  <span>Sí, me gustaría contar con esa ayuda</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-1">Podrás usar asistencia inteligente cuando te trabes con una explicación o quieras tests de práctica.</div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="allow_ai" value="no" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title flex items-center gap-2">
+                  <span>🔒 Por ahora no, solo mis apuntes</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-1">Sin sugerencias automáticas de IA. Estricto a tus materiales tradicionales.</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Privacidad de materiales -->
+          <div>
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              Privacidad de tus notas y apuntes
+            </label>
+            <p class="text-xs text-slate-500 mb-3">Tú controlas la visibilidad de tu espacio:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="sharing_pref" value="Privado 100%" class="sr-only" checked>
+                <div class="font-bold text-sm text-slate-800 choice-title flex items-center gap-2">
+                  <span>🔐 Completamente privado</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-1">Nadie más tiene acceso a tus notas ni a tus estadísticas de estudio.</div>
+              </label>
+
+              <label class="choice-card cursor-pointer p-4 rounded-xl border border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 transition">
+                <input type="radio" name="sharing_pref" value="Compartir con grupo en el futuro" class="sr-only">
+                <div class="font-bold text-sm text-slate-800 choice-title flex items-center gap-2">
+                  <span>👥 Considerar compartir con grupo más adelante</span>
+                </div>
+                <div class="text-xs text-slate-500 mt-1">Abierto a compartir resúmenes o dudas con compañeros en etapas futuras del proyecto.</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Banner recordatorio de cambio posterior -->
+          <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center gap-3">
+            <span class="text-xl">💡</span>
+            <p class="text-xs text-amber-900 leading-normal">
+              <strong>Importante:</strong> Todas estas decisiones se pueden modificar en cualquier momento desde tu configuración de perfil. Nada de esto es definitivo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Buttons navigation -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+          <button type="button" class="px-5 py-3 rounded-xl text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm font-semibold transition" onclick="goToStep(4)">
+            ← Volver al Paso 4
+          </button>
+          <button type="button" class="bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-brand-600/30 text-sm transition flex items-center gap-2" onclick="generateFinalProfile()">
+            <span>Generar mi perfil de estudio</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- VIEW 6: FINAL GENERATED STUDY PROFILE -->
+    <section id="view-profile" class="hidden space-y-6">
+
+      <!-- Personalized Welcome Banner -->
+      <div class="bg-gradient-to-r from-brand-600 via-brand-700 to-teal-700 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brand-700/20 relative overflow-hidden">
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-semibold mb-3">
+            Perfil personalizado
+          </div>
+          <h2 id="welcome-header" class="font-heading font-extrabold text-2xl sm:text-3xl tracking-tight leading-snug">
+            <!-- Dynamic personalized message injected here -->
+          </h2>
+          <p id="welcome-subtext" class="text-brand-100 text-sm sm:text-base mt-3 leading-relaxed max-w-2xl">
+            <!-- Dynamic subtext -->
+          </p>
+        </div>
+        <!-- Decorative abstract circle -->
+        <div class="absolute -right-10 -bottom-10 w-52 h-52 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+      </div>
+
+      <!-- Core Method Recommendation Card -->
+      <div class="app-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold border border-teal-200">
+            Método recomendado como punto de partida
+          </div>
+          <span class="text-xs text-slate-400 font-medium">Recomendación adaptativa inicial</span>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-teal-50/50 border border-teal-100 mb-5">
+          <h3 id="rec-method-title" class="font-heading font-extrabold text-xl text-teal-950 mb-1">
+            <!-- Method title -->
+          </h3>
+          <p id="rec-method-desc" class="text-sm text-slate-700 leading-relaxed">
+            <!-- Method explanation -->
+          </p>
+          <div class="mt-4 pt-3 border-t border-teal-200/60 flex flex-wrap items-center gap-4 text-xs font-semibold text-teal-800">
+            <span id="rec-session-badge" class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-teal-200 shadow-sm">
+              Bloque sugerido: 25 min + 5 min pausa
+            </span>
+            <span id="rec-first-step-badge" class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-teal-200 shadow-sm">
+              Primer paso: Esquematizar conceptos clave
+            </span>
+          </div>
+        </div>
+
+        <!-- Non-labeling philosophy callout -->
+        <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 flex items-start gap-3">
+          <div class="text-xs sm:text-sm text-amber-950 leading-relaxed">
+            <strong>Compromiso de adaptabilidad (sin etiquetas fijas):</strong> No te clasificamos de manera permanente como “estudiante visual”, “auditivo” o “memorístico”. Tus preferencias nos sirven como brújula inicial, pero el sistema evaluará continuamente qué métodos te ofrecen mayor comprensión, retención y tranquilidad según tu desempeño real.
+          </div>
+        </div>
+      </div>
+
+      <!-- Study Methods Library -->
+      <section class="app-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 border border-slate-100" aria-labelledby="methods-library-title">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold border border-brand-100 mb-3">
+              Recursos para elegir y combinar
+            </div>
+            <h3 id="methods-library-title" class="font-heading font-bold text-xl text-slate-900">Biblioteca de métodos de estudio</h3>
+            <p class="text-sm text-slate-500 mt-1">Probá uno por vez y quedate con lo que te ayude a comprender, recordar y avanzar.</p>
+          </div>
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar métodos de estudio">
+            <button type="button" class="method-filter active" data-method-filter="all">Todos</button>
+            <button type="button" class="method-filter" data-method-filter="foco">Foco y tiempo</button>
+            <button type="button" class="method-filter" data-method-filter="comprension">Comprensión</button>
+            <button type="button" class="method-filter" data-method-filter="memoria">Memoria</button>
+            <button type="button" class="method-filter" data-method-filter="organizacion">Organización</button>
+          </div>
+        </div>
+
+        <div id="methods-library-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <article class="method-card" data-method-category="foco"><span class="method-icon">🍅</span><div><h4>Pomodoro</h4><p>Estudiá 25 minutos con foco y descansá 5. Cada cuatro bloques, hacé una pausa más larga.</p><small>Ideal para: arrancar y sostener la atención.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">🗓️</span><div><h4>Time blocking</h4><p>Reservá en tu agenda bloques para una materia o tarea concreta, con un inicio y final definidos.</p><small>Ideal para: ordenar la semana y evitar multitarea.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">⏱️</span><div><h4>Regla de los 5 minutos</h4><p>Cuando cuesta empezar, comprometete a estudiar solo cinco minutos. El objetivo es vencer la resistencia inicial.</p><small>Ideal para: procrastinación.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">⏳</span><div><h4>Regla del 50/10</h4><p>Bloques de 50 minutos de concentración seguidos de 10 de pausa. Da más tiempo para profundizar que el Pomodoro tradicional.</p><small>Ideal para: materias complejas y cálculo.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">🌊</span><div><h4>Ritmos Ultradianos (90/20)</h4><p>Inmersión total de 90 minutos seguida de 20 minutos de descanso desconectado de pantallas, respetando los ciclos biológicos.</p><small>Ideal para: sesiones intensivas de tarde o mañana.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">⚖️</span><div><h4>The Third Time Rule</h4><p>Dedicá los primeros dos tercios del tiempo a asimilar conceptos y el último tercio estrictamente a autoevaluarte.</p><small>Ideal para: evitar quedarse solo en la lectura pasiva.</small></div></article>
+          <article class="method-card" data-method-category="foco"><span class="method-icon">📋</span><div><h4>Kanban de estudio</h4><p>Mové cada tema entre “Por estudiar”, “En proceso” y “Repasado” para ver tu progreso de un vistazo.</p><small>Ideal para: organizar varios temas o unidades.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">🗣️</span><div><h4>Método Feynman</h4><p>Explicá un concepto con palabras simples, como si se lo enseñaras a otra persona. Volvé a estudiar donde te trabes.</p><small>Ideal para: entender ideas complejas.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">📖</span><div><h4>SQ3R / EPL2R</h4><p>Explorá, preguntá, leé, recitá y repasá. Convierte la lectura de textos largos en una búsqueda activa de respuestas.</p><small>Ideal para: manuales, teoría y textos densos.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">❓</span><div><h4>Método socrático</h4><p>Preguntate por qué ocurre algo, qué evidencia lo respalda y qué cambiaría si una condición fuera distinta.</p><small>Ideal para: profundizar y relacionar conceptos.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">🔀</span><div><h4>Estudio intercalado</h4><p>Alterná subtemas o tipos de ejercicios en una misma sesión en lugar de repetir siempre el mismo formato.</p><small>Ideal para: distinguir y aplicar procedimientos.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">🔄</span><div><h4>Inmersión Inversa (Robinson)</h4><p>Empezá por resolver un problema o leer un caso real complejo, y buscá la teoría únicamente para destrabar lo que no entendés.</p><small>Ideal para: programación, idiomas y casos prácticos.</small></div></article>
+          <article class="method-card" data-method-category="comprension"><span class="method-icon">📚</span><div><h4>Lectura Incremental</h4><p>Leé por capas sucesivas: primero títulos y resúmenes; en una segunda pasada los párrafos clave; al final los detalles técnicos.</p><small>Ideal para: artículos científicos y textos extensos.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">🃏</span><div><h4>Recuerdo activo</h4><p>Cerrá los apuntes y respondé preguntas, resolvé ejercicios o explicá lo que recordás sin mirar.</p><small>Ideal para: comprobar lo que realmente sabés.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">📦</span><div><h4>Sistema Leitner</h4><p>Usá fichas en cajas o niveles: las que dominás se repasan con menos frecuencia y las difíciles vuelven al inicio.</p><small>Ideal para: vocabulario, fechas y fórmulas.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">🧠</span><div><h4>Blurting</h4><p>Después de estudiar, escribí en una hoja todo lo que recuerdes en 5 minutos. Luego comparalo con tus apuntes y marcá los vacíos con otro color.</p><small>Ideal para: medir retención real antes de un examen.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">🏠</span><div><h4>Palacio de la memoria</h4><p>Asociá datos con lugares conocidos y recorrélos mentalmente. Cuanto más visual y extraña sea la imagen, mejor.</p><small>Ideal para: listas y secuencias exactas.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">📄</span><div><h4>Hoja de Trampa (Cheat Sheet)</h4><p>Intentá resumir toda la materia en una sola carilla con letra diminuta. El esfuerzo extremo de síntesis graba los conceptos en tu memoria.</p><small>Ideal para: sintetizar antes de exámenes finales.</small></div></article>
+          <article class="method-card" data-method-category="memoria"><span class="method-icon">💡</span><div><h4>Mnemotecnia y Acrósticos</h4><p>Creá palabras clave, rimas o historias disparatadas con las iniciales de una lista que debas memorizar en orden.</p><small>Ideal para: clasificaciones, anatomía y leyes.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">🧩</span><div><h4>Esquemas</h4><p>Ordená la información de la idea general a los detalles con sangrías, llaves, flechas o numeración.</p><small>Ideal para: repasar un tema de un vistazo.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">🌿</span><div><h4>Mapas mentales</h4><p>Partí de una idea central y conectá ramas con palabras clave, colores y relaciones entre conceptos.</p><small>Ideal para: visualizar temas amplios.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">📝</span><div><h4>Método Cornell</h4><p>Dividí la hoja: apuntes a la derecha, preguntas o claves a la izquierda y un resumen breve al final.</p><small>Ideal para: clases y apuntes ordenados.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">↔️</span><div><h4>Cuadros comparativos</h4><p>Contrastá conceptos en columnas: definición, características, ejemplos, similitudes y diferencias.</p><small>Ideal para: teorías, autores y procesos parecidos.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">🎨</span><div><h4>Codificación Dual y Sketchnoting</h4><p>Procesá los conceptos en simultáneo con palabras y dibujos simples o diagramas. Multiplica las vías de recuperación mental.</p><small>Ideal para: anatomía, biología y procesos secuenciales.</small></div></article>
+          <article class="method-card" data-method-category="organizacion"><span class="method-icon">🎯</span><div><h4>Matriz de Priorización (Eisenhower)</h4><p>Clasificá los contenidos en: Esencial (pregunta fija de examen), Importante, Secundario y Relleno. Evitá gastar energía en lo accesorio.</p><small>Ideal para: programas de estudio kilométricos.</small></div></article>
+        </div>
+        <p id="methods-empty-state" class="hidden text-center text-sm text-slate-500 py-8">No hay métodos en esta categoría.</p>
+      </section>
+
+      <!-- Complete Diagnostic Profile Matrix -->
+      <div class="app-card bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60 border border-slate-100">
+        <h3 class="font-heading font-bold text-xl text-slate-900 mb-6 flex items-center justify-between">
+          <span>Resumen de tu Perfil de Estudio</span>
+          <button type="button" class="text-xs text-brand-600 hover:text-brand-800 font-bold bg-brand-50 hover:bg-brand-100 px-3 py-1.5 rounded-lg transition" onclick="editProfile()">
+            Modificar respuestas
+          </button>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <!-- Bloque Académico -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Contexto Académico</div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Nivel Educativo:</span>
+              <span id="prof-edu-level" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Materia principal:</span>
+              <span id="prof-subject" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Carrera / Curso:</span>
+              <span id="prof-career" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-500">Próximo examen / meta:</span>
+              <span id="prof-target-date" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+          </div>
+
+          <!-- Bloque Tiempos -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tiempos y Ritmo</div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Tiempo semanal estimado:</span>
+              <span id="prof-weekly-time" class="font-bold text-brand-600 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Días asignados:</span>
+              <span id="prof-study-days" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Horario de mayor foco:</span>
+              <span id="prof-peak-hour" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-500">Ritmo de sesión:</span>
+              <span id="prof-session-format" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+          </div>
+
+          <!-- Bloque Diagnóstico Tema -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Punto de Partida del Tema</div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Primer tema seleccionado:</span>
+              <span id="prof-first-topic" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Conocimiento autopercibido:</span>
+              <span id="prof-knowledge-level" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-500">Dificultad principal:</span>
+              <span id="prof-difficulty" class="font-bold text-amber-700 text-right">-</span>
+            </div>
+          </div>
+
+          <!-- Bloque Preferencias y Privacidad -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Preferencias y Configuración</div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Modos iniciales:</span>
+              <span id="prof-modalities" class="font-bold text-slate-800 text-right truncate max-w-[200px]">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">Estilo de explicación:</span>
+              <span id="prof-explanation-depth" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-500">IA complementaria:</span>
+              <span id="prof-ai-pref" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-500">Privacidad:</span>
+              <span id="prof-privacy" class="font-bold text-slate-800 text-right">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action bar -->
+        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <button type="button" id="btn-download-json" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs transition flex items-center gap-1.5 shadow-sm" onclick="exportProfileJSON()">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Descargar Perfil (.JSON)</span>
+            </button>
+            <button type="button" id="btn-copy-summary" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs transition flex items-center gap-1.5 shadow-sm" onclick="copyProfileSummary()">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span id="copy-btn-text">Copiar resumen</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" class="px-4 py-2.5 rounded-xl text-rose-600 hover:bg-rose-50 font-bold text-xs transition" onclick="resetInterview()">
+              Reiniciar entrevista
+            </button>
+            <div class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-2 rounded-xl">
+              Listo para la Etapa 2 (Biblioteca de apuntes)
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-3 z-50 flex items-center gap-2">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Mensaje</span>
+  </div>
+
+  <footer class="mt-auto py-6 border-t border-slate-200/80 text-center text-xs text-slate-400">
+    <p>Plataforma Inteligente de Apoyo al Estudio • Etapa 1: Registro, Entrevista y Perfil Adaptativo</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

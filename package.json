@@ -1,0 +1,17 @@
+{
+  "name": "plataforma-estudio-etapa1",
+  "version": "1.0.0",
+  "description": "Etapa 1: Registro, Entrevista Inicial y Perfil de Estudio Adaptativo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "estudio",
+    "educacion",
+    "onboarding",
+    "perfil-estudio"
+  ],
+  "author": "Daniela Ordoñez",
+  "license": "MIT"
+}

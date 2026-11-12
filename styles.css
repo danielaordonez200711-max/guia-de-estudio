@@ -1,0 +1,193 @@
+/* Custom styles and enhancements for Plataforma Inteligente de Apoyo al Estudio */
+
+:root {
+  --brand-primary: #2563eb;
+  --brand-secondary: #0d9488;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Card select states for radio buttons */
+.choice-card {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #ffffff;
+  user-select: none;
+}
+
+.choice-card:hover {
+  transform: translateY(-1px);
+  border-color: #93c5fd;
+}
+
+.choice-card:has(input[type="radio"]:checked) {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 1px #2563eb, 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.choice-card:has(input[type="radio"]:checked) .choice-title {
+  color: #1e40af;
+}
+
+.choice-card:has(input[type="radio"]:checked) .choice-icon {
+  background-color: #dbeafe;
+}
+
+/* Multi-choice cards for checkboxes */
+.multi-choice-card {
+  position: relative;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  user-select: none;
+}
+
+.multi-choice-card:hover {
+  border-color: #93c5fd;
+}
+
+.multi-choice-card:has(input[type="checkbox"]:checked) {
+  border-color: #2563eb;
+  background-color: #f0f7ff;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+.multi-choice-card:has(input[type="checkbox"]:checked) .choice-title {
+  color: #1e40af;
+}
+
+/* Day selector chips */
+.day-chip {
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.day-chip:has(input[type="checkbox"]:checked) {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* Step navigation dot buttons */
+.step-dot-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.step-dot-btn.active-step {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* Study methods library */
+.method-filter {
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.45rem 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.method-filter:hover,
+.method-filter.active {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.method-card {
+  align-items: flex-start;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.method-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+  transform: translateY(-1px);
+}
+
+.method-card.hidden {
+  display: none;
+}
+
+.method-icon {
+  align-items: center;
+  background: #e0f2fe;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.method-card h4 {
+  color: #0f172a;
+  font-size: 0.875rem;
+  font-weight: 800;
+  margin: 0 0 0.2rem;
+}
+
+.method-card p {
+  color: #475569;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.method-card small {
+  color: #0f766e;
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 0.45rem;
+}
+
+/* App card entry transition */
+.step-pane {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
